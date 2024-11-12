@@ -1,0 +1,2 @@
+class PracticalTest01Service {
+}

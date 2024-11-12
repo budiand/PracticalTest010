@@ -88,6 +88,14 @@ class PracticalTest01MainActivity : AppCompatActivity() {
             intent.putExtra("number_of_clicks", totalClicks)
             startActivityForResult(intent, 1);  // Lansează activitatea secundară
         }
+
+        // Restaurarea valorilor salvate dacă există
+        if (savedInstanceState != null) {
+            leftClicks = savedInstanceState.getInt(LEFT_VALUE_KEY, 0)
+            rightClicks = savedInstanceState.getInt(RIGHT_VALUE_KEY, 0)
+            leftEditText.setText(leftClicks.toString())
+            rightEditText.setText(rightClicks.toString())
+        }
     }
 
     private fun startServiceIfConditionIsMet(leftNumber: Int, rightNumber: Int) {
@@ -118,19 +126,21 @@ class PracticalTest01MainActivity : AppCompatActivity() {
         }
     }
 
-    // Restaurăm valorile în onRestoreInstanceState
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        leftEditText.setText(savedInstanceState.getString(LEFT_VALUE_KEY, "0"))
-        rightEditText.setText(savedInstanceState.getString(RIGHT_VALUE_KEY, "0"))
-    }
-
     // Salvăm valorile în Bundle înainte ca activitatea să fie distrusă
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        outState.putString(LEFT_VALUE_KEY, leftEditText.text.toString())
-        outState.putString(RIGHT_VALUE_KEY, rightEditText.text.toString())
+        outState.putInt(LEFT_VALUE_KEY, leftClicks)
+        outState.putInt(RIGHT_VALUE_KEY, rightClicks)
+    }
+
+    // Restaurăm valorile în onRestoreInstanceState
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        leftClicks = savedInstanceState.getInt(LEFT_VALUE_KEY, 0)
+        rightClicks = savedInstanceState.getInt(RIGHT_VALUE_KEY, 0)
+        leftEditText.setText(leftClicks.toString())
+        rightEditText.setText(rightClicks.toString())
     }
 
     override fun onResume() {

@@ -42,6 +42,7 @@ tools:context=".PracticalTest01MainActivity">
         android:inputType="text"
         android:enabled="false"
         android:saveEnabled="false"
+        android:gravity="center"
         android:text="@string/zero" />
 
     <EditText
@@ -52,6 +53,7 @@ tools:context=".PracticalTest01MainActivity">
         android:enabled="false"
         android:inputType="text"
         android:saveEnabled="false"
+        android:gravity="center"
         android:text="@string/zero" />
 
 </LinearLayout>
